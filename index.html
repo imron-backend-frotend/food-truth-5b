@@ -126,6 +126,12 @@
           <span id="sound-toggle-label" class="hidden md:inline">Звук: Вкл</span>
         </button>
 
+        <!-- QR Code / Share Link Button -->
+        <button onclick="openShareModal()" class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold bg-[#0a1120] hover:bg-emerald-950/40 text-emerald-400 border border-emerald-500/30 transition active:scale-95" title="Поделиться сайтом с учительницей и классом">
+          <i data-lucide="qr-code" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">QR / Ссылка</span>
+        </button>
+
         <!-- Print Memo Button -->
         <button onclick="window.print()" class="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-[#0a1120] hover:bg-slate-800 text-slate-300 border border-slate-700 transition" title="Распечатать памятку для урока">
           <i data-lucide="printer" class="w-4 h-4 text-emerald-400"></i>
@@ -1249,6 +1255,34 @@
 
     </div>
   </footer>
+
+  <!-- Share / QR Modal -->
+  <div id="share-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="rounded-3xl glass-card border-2 border-emerald-500/40 p-6 sm:p-8 max-w-sm w-full text-center relative shadow-2xl space-y-4">
+      <button onclick="closeShareModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-2 text-lg font-bold">
+        ✕
+      </button>
+      <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl mx-auto">
+        📱
+      </div>
+      <h3 class="text-lg font-bold font-display text-white">Ссылка для учительницы и класса</h3>
+      <p class="text-xs text-slate-400">
+        Наведите камеру смартфона на QR-код, чтобы открыть проект:
+      </p>
+      <div class="bg-white p-3 rounded-2xl inline-block shadow-lg">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://imron-backend-frotend.github.io/food-truth-5b/" alt="QR-код проекта" class="w-44 h-44 mx-auto rounded-lg">
+      </div>
+      <div class="space-y-2 pt-2">
+        <div class="flex items-center gap-2 bg-[#04070d] p-2 rounded-xl border border-emerald-500/30 text-xs">
+          <input id="share-url-input" type="text" readonly value="https://imron-backend-frotend.github.io/food-truth-5b/" class="bg-transparent text-emerald-400 font-mono flex-1 text-[11px] outline-none select-all">
+          <button onclick="copyShareUrl()" id="copy-btn" class="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-[#04070d] font-bold text-xs transition">
+            Копировать
+          </button>
+        </div>
+        <p id="copy-status" class="text-[11px] text-emerald-400 font-bold hidden">✅ Ссылка скопирована в буфер обмена!</p>
+      </div>
+    </div>
+  </div>
 
   <!-- Scripts -->
   <script src="app.js"></script>

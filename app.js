@@ -777,15 +777,46 @@ function launchConfetti() {
 }
 
 // --------------------------------------------------------------------------
-// 6. CERTIFICATE LIVE NAME SYNC
+// 7. SHARE & QR CODE MODAL
 // --------------------------------------------------------------------------
-function initCertificateInput() {
-  const input = document.getElementById('student-name-input');
-  const certNameDisplay = document.getElementById('cert-student-name');
-  if (input && certNameDisplay) {
-    input.addEventListener('input', (e) => {
-      const val = e.target.value.trim();
-      certNameDisplay.textContent = val ? val : 'Ученик 5 «Б» класса';
+window.openShareModal = function() {
+  playSound('click');
+  const modal = document.getElementById('share-modal');
+  if (modal) {
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+};
+
+window.closeShareModal = function() {
+  playSound('click');
+  const modal = document.getElementById('share-modal');
+  if (modal) {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+};
+
+window.copyShareUrl = function() {
+  const input = document.getElementById('share-url-input');
+  if (input) {
+    input.select();
+    navigator.clipboard.writeText(input.value).then(() => {
+      playSound('correct');
+      const status = document.getElementById('copy-status');
+      if (status) {
+        status.classList.remove('hidden');
+        setTimeout(() => status.classList.add('hidden'), 3500);
+      }
+    }).catch(() => {
+      document.execCommand('copy');
+      playSound('correct');
+      const status = document.getElementById('copy-status');
+      if (status) {
+        status.classList.remove('hidden');
+        setTimeout(() => status.classList.add('hidden'), 3500);
+      }
     });
   }
-}
+};
+
