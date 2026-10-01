@@ -1,0 +1,311 @@
+/* ==========================================================================
+   Food Truth Project - Style System
+   Theme: Emerald & Deep Obsidian (Green & Black) + Minimal White & Black
+   Author: Raimov Ikhlas, 5 "B" Grade
+   ========================================================================== */
+
+/* Base & Typography */
+:root {
+  --bg-primary: #050811;
+  --bg-secondary: #090e1a;
+  --bg-card: rgba(12, 19, 34, 0.85);
+  --bg-card-border: rgba(16, 185, 129, 0.18);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent-green: #10b981;
+  --accent-neon: #00ff87;
+  --accent-glow: rgba(16, 185, 129, 0.25);
+  --accent-surface: rgba(16, 185, 129, 0.1);
+}
+
+/* White-Black Minimal Theme */
+body.theme-monochrome {
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-card: rgba(20, 20, 20, 0.95);
+  --bg-card-border: rgba(255, 255, 255, 0.2);
+  --text-main: #ffffff;
+  --text-muted: #a3a3a3;
+  --accent-green: #ffffff;
+  --accent-neon: #ffffff;
+  --accent-glow: rgba(255, 255, 255, 0.2);
+  --accent-surface: rgba(255, 255, 255, 0.08);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: #04070d;
+}
+::-webkit-scrollbar-thumb {
+  background: #132433;
+  border-radius: 5px;
+  border: 2px solid #04070d;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #10b981;
+}
+
+/* Glow & Blur Effects */
+.glow-emerald {
+  box-shadow: 0 0 35px -5px rgba(16, 185, 129, 0.3);
+}
+
+.glow-neon {
+  box-shadow: 0 0 25px rgba(0, 255, 135, 0.35);
+}
+
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--bg-card-border);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(16, 185, 129, 0.45);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.15);
+}
+
+/* Sugar Button Active State */
+.sugar-btn {
+  transition: all 0.25s ease;
+}
+.sugar-btn.active {
+  border-color: #10b981 !important;
+  background-color: rgba(16, 185, 129, 0.12) !important;
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.25);
+  transform: translateX(4px);
+}
+
+/* Organ Button Active State */
+.organ-btn {
+  transition: all 0.25s ease;
+}
+.organ-btn.active {
+  border-color: #10b981 !important;
+  background-color: rgba(16, 185, 129, 0.15) !important;
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.22);
+}
+
+/* Realistic 3D Sugar Cube with Neon Glow */
+.sugar-cube {
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, #ffffff 0%, #d1fae5 50%, #6ee7b7 100%);
+  border: 1px solid #a7f3d0;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4), inset -1px -1px 3px rgba(16, 185, 129, 0.3), 0 0 8px rgba(16, 185, 129, 0.35);
+  display: inline-block;
+  animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  position: relative;
+}
+
+.sugar-cube::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 7px;
+  height: 7px;
+  background: #ffffff;
+  border-radius: 2px;
+  opacity: 0.9;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0) rotate(-20deg);
+    opacity: 0;
+  }
+  75% {
+    transform: scale(1.15) rotate(6deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   QUIZ STYLES - ULTRA MODERN & ROBUST
+   ========================================================================== */
+.quiz-opt-btn {
+  position: relative;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border-radius: 1rem;
+  background: rgba(8, 14, 26, 0.8);
+  border: 1px solid rgba(30, 41, 59, 0.9);
+  color: #f1f5f9;
+  font-size: 0.925rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.quiz-opt-btn:hover:not(.locked) {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.08);
+  transform: translateX(6px);
+  box-shadow: 0 4px 20px -2px rgba(16, 185, 129, 0.2);
+}
+
+.quiz-opt-btn:active:not(.locked) {
+  transform: scale(0.99);
+}
+
+.quiz-opt-btn.locked {
+  pointer-events: none;
+}
+
+.quiz-opt-btn.is-correct {
+  border-color: #10b981 !important;
+  background: rgba(16, 185, 129, 0.2) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.35) !important;
+  transform: scale(1.01);
+}
+
+.quiz-opt-btn.is-wrong {
+  border-color: #f43f5e !important;
+  background: rgba(244, 63, 94, 0.18) !important;
+  color: #ffe4e6 !important;
+  box-shadow: 0 0 20px rgba(244, 63, 94, 0.25) !important;
+}
+
+.quiz-opt-key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.6rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-family: monospace;
+  color: #94a3b8;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.quiz-opt-btn:hover:not(.locked) .quiz-opt-key {
+  border-color: #10b981;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.15);
+}
+
+.quiz-opt-btn.is-correct .quiz-opt-key {
+  background: #10b981;
+  color: #04070d;
+  border-color: #10b981;
+}
+
+.quiz-opt-btn.is-wrong .quiz-opt-key {
+  background: #f43f5e;
+  color: #ffffff;
+  border-color: #f43f5e;
+}
+
+/* Pulsing Next Question Button */
+.btn-next-pulse {
+  animation: nextPulse 1.8s infinite;
+}
+
+@keyframes nextPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 0 14px rgba(16, 185, 129, 0);
+  }
+}
+
+/* Certificate Styles */
+.certificate-frame {
+  background: linear-gradient(135deg, #090e1a 0%, #0c1829 50%, #06111f 100%);
+  border: 2px solid #10b981;
+  box-shadow: 0 0 40px rgba(16, 185, 129, 0.25), inset 0 0 20px rgba(16, 185, 129, 0.08);
+}
+
+.certificate-seal {
+  background: radial-gradient(circle, #34d399 0%, #059669 100%);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+}
+
+/* ==========================================================================
+   PRINT STYLES FOR SCHOOL DEFENSE (A4 SHEET)
+   ========================================================================== */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #111827 !important;
+    font-size: 11pt !important;
+  }
+
+  header, nav, #mobile-menu, #quiz-container, .ambient-glow, .hide-on-print, #sound-toggle-btn, #theme-toggle-btn {
+    display: none !important;
+  }
+
+  .max-w-7xl, .max-w-4xl {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  section {
+    padding: 12px 0 !important;
+    border: none !important;
+    page-break-inside: avoid;
+  }
+
+  .glass-card, .rounded-3xl, .rounded-2xl {
+    background: #ffffff !important;
+    color: #111827 !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: none !important;
+    border-radius: 8px !important;
+  }
+
+  h1, h2, h3, h4, p, span, strong, div {
+    color: #111827 !important;
+    -webkit-text-fill-color: initial !important;
+    text-shadow: none !important;
+  }
+
+  .certificate-frame {
+    background: #ffffff !important;
+    border: 3px double #059669 !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+    margin: 20px auto !important;
+    page-break-inside: avoid;
+  }
+
+  #quiz-result-box {
+    display: block !important;
+  }
+
+  body::before {
+    content: "Школьный исследовательский проект 5 «Б» класса | Автор: Раимов Ихлас | Тема: Неправильная пища";
+    display: block;
+    text-align: center;
+    font-size: 10pt;
+    font-weight: bold;
+    color: #059669;
+    border-bottom: 2px solid #059669;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+}

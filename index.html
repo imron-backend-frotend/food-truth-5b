@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вся правда о неправильной пище | Проект Раимова Ихласа 5 «Б»</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥗</text></svg>">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Unbounded:wght@600;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Unbounded"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              black: '#04070d',
+              card: '#0a101d',
+              emerald: '#10b981',
+              neon: '#00ff87',
+              mint: '#34d399',
+              darkgreen: '#064e3b',
+            }
+          },
+          animation: {
+            'float-slow': 'float 5s ease-in-out infinite',
+            'glow-pulse': 'glowPulse 3s ease-in-out infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            glowPulse: {
+              '0%, 100%': { opacity: '0.3', transform: 'scale(1)' },
+              '50%': { opacity: '0.6', transform: 'scale(1.05)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  
+  <!-- Chart.js for 5 «Б» survey -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#04070d] text-slate-100 font-sans selection:bg-emerald-500 selection:text-black min-h-screen relative overflow-x-hidden">
+
+  <!-- Ambient Glow Effects (Emerald & Neon Cyber-Eco) -->
+  <div class="fixed top-0 left-1/4 w-[650px] h-[650px] bg-emerald-500/10 rounded-full blur-[150px] pointer-events-none -z-10 animate-glow-pulse"></div>
+  <div class="fixed bottom-1/4 right-5 w-[500px] h-[500px] bg-teal-500/10 rounded-full blur-[140px] pointer-events-none -z-10"></div>
+  <div class="fixed top-1/2 left-5 w-[380px] h-[380px] bg-emerald-400/5 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+
+  <!-- Header / Navbar -->
+  <header class="sticky top-0 z-50 backdrop-blur-xl bg-[#04070d]/85 border-b border-emerald-500/20 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Logo & Student Tag -->
+      <a href="#" class="flex items-center gap-3.5 group">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-500 via-emerald-400 to-teal-200 p-[2px] shadow-lg shadow-emerald-500/20 transition-transform duration-300 group-hover:scale-105">
+          <div class="w-full h-full bg-[#04070d] rounded-[14px] flex items-center justify-center text-2xl">
+            🌿
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-display font-extrabold text-base sm:text-lg tracking-tight text-white group-hover:text-emerald-400 transition">
+              FOOD_TRUTH
+            </span>
+            <span class="bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider font-mono">
+              5 «Б» класс
+            </span>
+          </div>
+          <p class="text-xs text-slate-400">
+            Автор: <span class="text-emerald-400 font-bold">Раимов Ихлас</span>
+          </p>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden xl:flex items-center gap-1 bg-[#09101d]/80 p-1.5 rounded-full border border-emerald-500/20 shadow-inner">
+        <a href="#about" class="px-3.5 py-1.5 text-xs font-semibold text-slate-300 hover:text-white hover:bg-emerald-500/10 rounded-full transition">О проекте</a>
+        <a href="#dangers" class="px-3.5 py-1.5 text-xs font-semibold text-slate-300 hover:text-white hover:bg-emerald-500/10 rounded-full transition">Вредная еда</a>
+        <a href="#sugar" class="px-3.5 py-1.5 text-xs font-semibold text-slate-300 hover:text-white hover:bg-emerald-500/10 rounded-full transition">Сахаромер</a>
+        <a href="#body" class="px-3.5 py-1.5 text-xs font-semibold text-slate-300 hover:text-white hover:bg-emerald-500/10 rounded-full transition">Влияние на тело</a>
+        <a href="#calculator" class="px-3.5 py-1.5 text-xs font-semibold text-slate-300 hover:text-white hover:bg-emerald-500/10 rounded-full transition">Калькулятор</a>
+        <a href="#survey" class="px-3.5 py-1.5 text-xs font-semibold text-slate-300 hover:text-white hover:bg-emerald-500/10 rounded-full transition">Опрос 5«Б»</a>
+        <a href="#alternatives" class="px-3.5 py-1.5 text-xs font-semibold text-slate-300 hover:text-white hover:bg-emerald-500/10 rounded-full transition">Здоровые замены</a>
+        <a href="#quiz" class="px-3.5 py-1.5 text-xs font-bold text-emerald-300 bg-emerald-500/20 hover:bg-emerald-500/30 rounded-full transition flex items-center gap-1">
+          <span>Викторина</span>
+          <span class="text-xs">🎯</span>
+        </a>
+      </nav>
+
+      <!-- Action & Control Buttons -->
+      <div class="flex items-center gap-2.5">
+        
+        <!-- Theme Toggle (Green/Black vs White/Black) -->
+        <button id="theme-toggle-btn" class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold bg-[#0a1120] hover:bg-emerald-950/40 text-slate-200 border border-emerald-500/30 transition active:scale-95" title="Переключить тему: Зелено-черный / Бело-черный">
+          <span id="theme-toggle-icon">🌿</span>
+          <span id="theme-toggle-label" class="hidden sm:inline">Тема</span>
+        </button>
+
+        <!-- Sound Toggle -->
+        <button id="sound-toggle-btn" class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold bg-[#0a1120] hover:bg-emerald-950/40 text-slate-200 border border-emerald-500/30 transition active:scale-95" title="Включить / выключить звуковые эффекты">
+          <span id="sound-toggle-icon">🔊</span>
+          <span id="sound-toggle-label" class="hidden md:inline">Звук: Вкл</span>
+        </button>
+
+        <!-- Print Memo Button -->
+        <button onclick="window.print()" class="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-[#0a1120] hover:bg-slate-800 text-slate-300 border border-slate-700 transition" title="Распечатать памятку для урока">
+          <i data-lucide="printer" class="w-4 h-4 text-emerald-400"></i>
+          <span>Печать</span>
+        </button>
+
+        <!-- CTA Test Button -->
+        <a href="#quiz" class="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-[#04070d] shadow-lg shadow-emerald-500/25 transition transform active:scale-95 font-display">
+          <span>Тест</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </a>
+
+        <!-- Mobile Menu Toggle -->
+        <button id="mobile-menu-btn" class="xl:hidden p-2 rounded-xl bg-[#0a1120] border border-emerald-500/30 text-emerald-400">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden xl:hidden px-4 pt-2 pb-6 bg-[#04070d]/95 border-b border-emerald-500/20 space-y-2">
+      <a href="#about" class="block px-3 py-2 text-sm text-slate-300 hover:text-white hover:bg-emerald-500/10 rounded-lg">О проекте</a>
+      <a href="#dangers" class="block px-3 py-2 text-sm text-slate-300 hover:text-white hover:bg-emerald-500/10 rounded-lg">Вредная еда</a>
+      <a href="#sugar" class="block px-3 py-2 text-sm text-slate-300 hover:text-white hover:bg-emerald-500/10 rounded-lg">Сахаромер</a>
+      <a href="#body" class="block px-3 py-2 text-sm text-slate-300 hover:text-white hover:bg-emerald-500/10 rounded-lg">Влияние на тело</a>
+      <a href="#calculator" class="block px-3 py-2 text-sm text-slate-300 hover:text-white hover:bg-emerald-500/10 rounded-lg">Калькулятор перекуса</a>
+      <a href="#survey" class="block px-3 py-2 text-sm text-slate-300 hover:text-white hover:bg-emerald-500/10 rounded-lg">Исследование 5«Б»</a>
+      <a href="#alternatives" class="block px-3 py-2 text-sm text-slate-300 hover:text-white hover:bg-emerald-500/10 rounded-lg">Здоровые замены</a>
+      <a href="#quiz" class="block px-3 py-2 text-sm text-emerald-400 font-bold bg-emerald-500/10 rounded-lg">Викторина с сертификатом</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Column -->
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          
+          <!-- School Badge -->
+          <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#0a1120] border border-emerald-500/30 shadow-inner">
+            <span class="flex h-2.5 w-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+            <span class="text-xs uppercase tracking-wider font-extrabold text-emerald-300 font-mono">
+              Школьный исследовательский проект • 2026
+            </span>
+          </div>
+
+          <!-- Title -->
+          <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15] text-white">
+            НЕПРАВИЛЬНАЯ ПИЩА: <br>
+            <span class="bg-gradient-to-r from-emerald-400 via-teal-200 to-green-400 bg-clip-text text-transparent">
+              ЛОВУШКА ВКУСА
+            </span>
+          </h1>
+
+          <!-- Subtitle -->
+          <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+            Почему чипсы, газировка и сухарики вызывают привыкание? Что происходит в организме школьника при фастфуд-диете и как сделать современный здоровый выбор, оставаясь полным сил на уроках и в спорте.
+          </p>
+
+          <!-- Student Card -->
+          <div class="p-5 rounded-2xl glass-card border border-emerald-500/30 flex flex-col sm:flex-row items-center gap-4 text-left shadow-xl">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center text-3xl shadow-lg shadow-emerald-500/30 shrink-0 text-slate-950 font-bold">
+              👨‍🎓
+            </div>
+            <div class="space-y-1 text-center sm:text-left">
+              <div class="flex items-center justify-center sm:justify-start gap-2">
+                <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Проект подготовил</span>
+                <span class="text-[11px] bg-emerald-950/80 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded-md font-mono font-bold">5 «Б» класс</span>
+              </div>
+              <h3 class="text-lg font-bold text-white font-display">Раимов Ихлас</h3>
+              <p class="text-xs text-slate-400">
+                Тема исследования: «Скрытые опасности фастфуда и снеков для организма пятиклассника»
+              </p>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3.5 pt-2">
+            <a href="#sugar" class="px-6 py-3.5 rounded-xl font-bold text-sm bg-emerald-500 hover:bg-emerald-400 text-[#04070d] shadow-lg shadow-emerald-500/30 flex items-center gap-2 transition transform hover:-translate-y-0.5 font-display">
+              <i data-lucide="boxes" class="w-4 h-4"></i>
+              <span>Сколько сахара в коле?</span>
+            </a>
+            <a href="#calculator" class="px-6 py-3.5 rounded-xl font-bold text-sm bg-[#0a1120] hover:bg-[#101b33] text-white border border-emerald-500/30 flex items-center gap-2 transition transform hover:-translate-y-0.5">
+              <i data-lucide="calculator" class="w-4 h-4 text-emerald-400"></i>
+              <span>Калькулятор перекуса</span>
+            </a>
+            <a href="#quiz" class="px-6 py-3.5 rounded-xl font-bold text-sm bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-2 transition">
+              <i data-lucide="sparkles" class="w-4 h-4 text-emerald-400"></i>
+              <span>Пройти тест 5 «Б»</span>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Right Column (Hero Graphic Bento) -->
+        <div class="lg:col-span-5 relative">
+          <div class="rounded-3xl glass-card border border-emerald-500/30 p-6 sm:p-8 shadow-2xl relative overflow-hidden animate-float-slow">
+            
+            <div class="flex items-center justify-between mb-6">
+              <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 font-mono">
+                Досье опасности
+              </span>
+              <span class="text-3xl">⚠️</span>
+            </div>
+
+            <!-- 3 Mini Badges -->
+            <div class="grid grid-cols-3 gap-3 my-5 text-center">
+              <div class="p-3 rounded-2xl bg-[#04070d]/90 border border-emerald-500/20">
+                <div class="text-3xl mb-1">🍟</div>
+                <span class="text-[11px] font-bold text-slate-300">Трансжиры</span>
+                <div class="text-[10px] text-emerald-400 font-mono font-bold">до 35% веса</div>
+              </div>
+              <div class="p-3 rounded-2xl bg-[#04070d]/90 border border-emerald-500/20">
+                <div class="text-3xl mb-1">🥤</div>
+                <span class="text-[11px] font-bold text-slate-300">Сахар</span>
+                <div class="text-[10px] text-emerald-400 font-mono font-bold">12 кубиков</div>
+              </div>
+              <div class="p-3 rounded-2xl bg-[#04070d]/90 border border-emerald-500/20">
+                <div class="text-3xl mb-1">🧂</div>
+                <span class="text-[11px] font-bold text-slate-300">Соль & Е621</span>
+                <div class="text-[10px] text-emerald-400 font-mono font-bold">3x норма</div>
+              </div>
+            </div>
+
+            <div class="space-y-3 bg-[#04070d]/80 p-4 rounded-2xl border border-emerald-500/20">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-400 font-medium">Скрытый сахар в газировке:</span>
+                <span class="text-emerald-400 font-bold font-mono">200% суточной нормы</span>
+              </div>
+              <div class="w-full bg-slate-900 rounded-full h-2.5 overflow-hidden border border-emerald-500/20">
+                <div class="bg-gradient-to-r from-emerald-500 to-teal-300 h-2.5 rounded-full w-[85%]"></div>
+              </div>
+              <p class="text-[11px] text-slate-400 italic">
+                «Фастфуд искусственно усиливают глутаматом и сахаром, вызывая ложный голод уже через 30 минут.»
+              </p>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-emerald-500/20 flex items-center justify-between text-xs text-slate-400">
+              <span>Школьный проект 5 «Б»</span>
+              <span class="text-emerald-400 font-bold flex items-center gap-1">
+                <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Раимов Ихлас
+              </span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Stats Ticker -->
+  <section id="about" class="py-10 bg-[#060b14] border-y border-emerald-500/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        
+        <div class="space-y-1">
+          <div class="font-display text-3xl sm:text-4xl font-black text-emerald-400">12 шт</div>
+          <p class="text-xs sm:text-sm text-slate-400">Кубиков сахара в 0.5л коле</p>
+        </div>
+
+        <div class="space-y-1">
+          <div class="font-display text-3xl sm:text-4xl font-black text-white">540 ккал</div>
+          <p class="text-xs sm:text-sm text-slate-400">В одной пачке чипсов (100г)</p>
+        </div>
+
+        <div class="space-y-1">
+          <div class="font-display text-3xl sm:text-4xl font-black text-emerald-300">45 мин</div>
+          <p class="text-xs sm:text-sm text-slate-400">Бега нужно, чтобы сжечь картошку фри</p>
+        </div>
+
+        <div class="space-y-1">
+          <div class="font-display text-3xl sm:text-4xl font-black text-teal-400">5 «Б»</div>
+          <p class="text-xs sm:text-sm text-slate-400">Класс автора Раимова Ихласа</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: ТОП-5 Вредных продуктов -->
+  <section id="dangers" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider font-mono">
+        <i data-lucide="shield-alert" class="w-3.5 h-3.5"></i> Главные пищевые враги
+      </div>
+      <h2 class="font-display text-3xl sm:text-4xl font-black text-white tracking-tight">
+        ЧТО ПРЯЧЕТСЯ В ФАСТФУДЕ?
+      </h2>
+      <p class="text-slate-400 text-sm sm:text-base">
+        Раимов Ихлас исследовал состав популярных перекусов пятиклассников. Вот что производители маскируют яркой упаковкой:
+      </p>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <!-- Card 1 -->
+      <div class="rounded-3xl glass-card p-6 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-4xl">🍟</span>
+            <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+              Вред: 9/10
+            </span>
+          </div>
+          <h3 class="font-display text-lg font-bold text-white mb-2">Чипсы и солёные сухарики</h3>
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
+            Обжариваются в многократно перегретом фритюрном масле. При этом образуется опасный токсин <strong>акриламид</strong>, а вкус формируется избытком соли и глутаматом (Е621).
+          </p>
+          <div class="space-y-1.5 text-xs bg-[#04070d]/80 p-3.5 rounded-xl border border-emerald-500/20 mb-4">
+            <div class="flex justify-between"><span class="text-slate-400">Трансжиры:</span><span class="text-emerald-400 font-bold">до 35%</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">Соль:</span><span class="text-emerald-400 font-bold">Суточная доза</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">Опасность:</span><span class="text-slate-300 font-semibold">Гастрит, отёки</span></div>
+          </div>
+        </div>
+        <div class="text-xs text-slate-400 border-t border-emerald-500/20 pt-3">
+          💡 <span class="text-emerald-300 font-semibold">Опыт Ихласа:</span> На фильтровальной бумаге чипс оставляет прозрачное жирное пятно!
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="rounded-3xl glass-card p-6 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-4xl">🥤</span>
+            <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+              Вред: 10/10
+            </span>
+          </div>
+          <h3 class="font-display text-lg font-bold text-white mb-2">Сладкая газировка и энергетики</h3>
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
+            Жидкие конфеты с <strong>ортофосфорной кислотой (Е338)</strong>. Она вымывает кальций из растущих костей, разъедает зубную эмаль и провоцирует кариес.
+          </p>
+          <div class="space-y-1.5 text-xs bg-[#04070d]/80 p-3.5 rounded-xl border border-emerald-500/20 mb-4">
+            <div class="flex justify-between"><span class="text-slate-400">Сахар:</span><span class="text-emerald-400 font-bold font-mono">12 кубиков</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">Кислотность (pH):</span><span class="text-emerald-400 font-bold font-mono">2.5 (как уксус!)</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">Опасность:</span><span class="text-slate-300 font-semibold">Разрушение зубов</span></div>
+          </div>
+        </div>
+        <div class="text-xs text-slate-400 border-t border-emerald-500/20 pt-3">
+          💡 <span class="text-emerald-300 font-semibold">Факт:</span> Газировка не утоляет жажду, а усиливает обезвоживание.
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="rounded-3xl glass-card p-6 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-4xl">🍔</span>
+            <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+              Вред: 8.5/10
+            </span>
+          </div>
+          <h3 class="font-display text-lg font-bold text-white mb-2">Бургеры и наггетсы</h3>
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
+            Белая булка без витаминов, жирный промышленный майонез и панировка из пережаренного жира. В одном таком бургере до трети дневной нормы калорий.
+          </p>
+          <div class="space-y-1.5 text-xs bg-[#04070d]/80 p-3.5 rounded-xl border border-emerald-500/20 mb-4">
+            <div class="flex justify-between"><span class="text-slate-400">Калории:</span><span class="text-emerald-400 font-bold font-mono">550-700 ккал</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">Клетчатка:</span><span class="text-slate-400 font-bold">Меньше 1 грамма</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">Опасность:</span><span class="text-slate-300 font-semibold">Сонливость на уроке</span></div>
+          </div>
+        </div>
+        <div class="text-xs text-slate-400 border-t border-emerald-500/20 pt-3">
+          💡 <span class="text-emerald-300 font-semibold">Внимание:</span> Тяжелая жирная пища отнимает силы у мозга во время учебы.
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="rounded-3xl glass-card p-6 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-4xl">🍫</span>
+            <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+              Вред: 8/10
+            </span>
+          </div>
+          <h3 class="font-display text-lg font-bold text-white mb-2">Шоколадные батончики и конфеты</h3>
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
+            Вместо какао-масла дешевые гидрогенизированные растительные жиры и красители (Е102, Е129), вызывающие рассеянность и гиперактивность.
+          </p>
+          <div class="space-y-1.5 text-xs bg-[#04070d]/80 p-3.5 rounded-xl border border-emerald-500/20 mb-4">
+            <div class="flex justify-between"><span class="text-slate-400">Сахар:</span><span class="text-emerald-400 font-bold font-mono">До 60% веса</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">Красители:</span><span class="text-emerald-400 font-bold">Снижают фокус</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">Опасность:</span><span class="text-slate-300 font-semibold">Сахарные качели</span></div>
+          </div>
+        </div>
+        <div class="text-xs text-slate-400 border-t border-emerald-500/20 pt-3">
+          💡 <span class="text-emerald-300 font-semibold">Факт:</span> Энергия от сладости длится 15 минут, а потом резко падает.
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="rounded-3xl glass-card p-6 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-4xl">🌭</span>
+            <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+              Вред: 8/10
+            </span>
+          </div>
+          <h3 class="font-display text-lg font-bold text-white mb-2">Сосиски в тесте и колбасы</h3>
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
+            Переработанное мясо содержит <strong>нитрит натрия (Е250)</strong> для розового цвета и фосфаты, препятствующие усвоению кальция в детском возрасте.
+          </p>
+          <div class="space-y-1.5 text-xs bg-[#04070d]/80 p-3.5 rounded-xl border border-emerald-500/20 mb-4">
+            <div class="flex justify-between"><span class="text-slate-400">Скрытый жир:</span><span class="text-emerald-400 font-bold font-mono">До 40%</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">Чистое мясо:</span><span class="text-slate-400 font-bold">Менее 30%</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">Опасность:</span><span class="text-slate-300 font-semibold">Нагрузка на почки</span></div>
+          </div>
+        </div>
+        <div class="text-xs text-slate-400 border-t border-emerald-500/20 pt-3">
+          💡 <span class="text-emerald-300 font-semibold">Совет Ихласа:</span> Лучше запеченная курица, чем сосиска в тесте!
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="rounded-3xl glass-card p-6 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-4xl">🍜</span>
+            <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+              Вред: 7.5/10
+            </span>
+          </div>
+          <h3 class="font-display text-lg font-bold text-white mb-2">Лапша быстрого приготовления</h3>
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
+            Брикет лапши обжаривается в дешевом техническом пальмовом масле, а пакетик с приправой — это соль с ароматизаторами без витаминов.
+          </p>
+          <div class="space-y-1.5 text-xs bg-[#04070d]/80 p-3.5 rounded-xl border border-emerald-500/20 mb-4">
+            <div class="flex justify-between"><span class="text-slate-400">Витамины:</span><span class="text-slate-400 font-bold font-mono">0% (пустышка)</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">Натрий:</span><span class="text-emerald-400 font-bold">1800 мг в порции</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">Опасность:</span><span class="text-slate-300 font-semibold">Изжога и жажда</span></div>
+          </div>
+        </div>
+        <div class="text-xs text-slate-400 border-t border-emerald-500/20 pt-3">
+          💡 <span class="text-emerald-300 font-semibold">Вывод:</span> Быстро набивает желудок, но лишает организм полезных веществ.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 2: Интерактивный Сахаромер -->
+  <section id="sugar" class="py-20 bg-[#060b14] border-y border-emerald-500/20 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider font-mono">
+          🧊 Интерактивный анализатор
+        </div>
+        <h2 class="font-display text-3xl sm:text-4xl font-black text-white tracking-tight">
+          САХАРОМЕР: СКОЛЬКО КУБИКОВ СПРЯТАНО?
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base">
+          Нажми на напиток, чтобы увидеть выпадающие 3D-кубики сахара и сравнить их с дневной нормой для 5 «Б» класса (25 грамм):
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Selection List -->
+        <div class="lg:col-span-6 space-y-3">
+          
+          <button onclick="selectSugarItem('cola', this)" data-key="cola" class="sugar-btn active w-full p-4 rounded-2xl glass-card flex items-center justify-between text-left group">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl">🥤</span>
+              <div>
+                <h4 class="font-bold text-white group-hover:text-emerald-400 transition">Кола / Газировка (0.5 л)</h4>
+                <p class="text-xs text-slate-400">Хит среди школьных перекусов</p>
+              </div>
+            </div>
+            <span class="text-xs font-bold font-mono text-emerald-400 bg-emerald-500/15 border border-emerald-500/30 px-3 py-1 rounded-lg">12 кубиков</span>
+          </button>
+
+          <button onclick="selectSugarItem('juice', this)" data-key="juice" class="sugar-btn w-full p-4 rounded-2xl glass-card flex items-center justify-between text-left group">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl">🧃</span>
+              <div>
+                <h4 class="font-bold text-white group-hover:text-emerald-400 transition">Пакетированный «сок» (0.5 л)</h4>
+                <p class="text-xs text-slate-400">Кажется полезным, но клетчатки 0%</p>
+              </div>
+            </div>
+            <span class="text-xs font-bold font-mono text-emerald-400 bg-emerald-500/15 border border-emerald-500/30 px-3 py-1 rounded-lg">10 кубиков</span>
+          </button>
+
+          <button onclick="selectSugarItem('energy', this)" data-key="energy" class="sugar-btn w-full p-4 rounded-2xl glass-card flex items-center justify-between text-left group">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl">⚡</span>
+              <div>
+                <h4 class="font-bold text-white group-hover:text-emerald-400 transition">Энергетический напиток (0.33 л)</h4>
+                <p class="text-xs text-slate-400">Опасная смесь сахара, таурина и кофеина</p>
+              </div>
+            </div>
+            <span class="text-xs font-bold font-mono text-emerald-400 bg-emerald-500/15 border border-emerald-500/30 px-3 py-1 rounded-lg">9 кубиков</span>
+          </button>
+
+          <button onclick="selectSugarItem('shake', this)" data-key="shake" class="sugar-btn w-full p-4 rounded-2xl glass-card flex items-center justify-between text-left group">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl">🍦</span>
+              <div>
+                <h4 class="font-bold text-white group-hover:text-emerald-400 transition">Молочный коктейль в фастфуде</h4>
+                <p class="text-xs text-slate-400">Тройная доза сахара и скрытый жир</p>
+              </div>
+            </div>
+            <span class="text-xs font-bold font-mono text-emerald-400 bg-emerald-500/15 border border-emerald-500/30 px-3 py-1 rounded-lg">14 кубиков</span>
+          </button>
+
+          <button onclick="selectSugarItem('water', this)" data-key="water" class="sugar-btn w-full p-4 rounded-2xl glass-card flex items-center justify-between text-left group">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl">💧</span>
+              <div>
+                <h4 class="font-bold text-emerald-300">Чистая вода (0.5 л)</h4>
+                <p class="text-xs text-slate-400">Выбор Раимова Ихласа для каждого дня</p>
+              </div>
+            </div>
+            <span class="text-xs font-bold font-mono text-emerald-300 bg-emerald-500/20 border border-emerald-500/40 px-3 py-1 rounded-lg">0 кубиков (ЗОЖ!)</span>
+          </button>
+
+        </div>
+
+        <!-- 3D Sugar Display Box -->
+        <div class="lg:col-span-6">
+          <div class="rounded-3xl glass-card border border-emerald-500/30 p-6 sm:p-8 shadow-2xl relative overflow-hidden text-center">
+            
+            <div class="flex items-center justify-between pb-4 border-b border-emerald-500/20 text-xs">
+              <span class="text-slate-400">Выбран продукт: <strong id="sugar-name" class="text-white">Кола (0.5 л)</strong></span>
+              <span class="text-slate-400">Норма: <strong class="text-emerald-400">до 25г (5 кубиков)</strong></span>
+            </div>
+
+            <!-- Cubes Canvas -->
+            <div class="my-7 py-4 min-h-[170px] flex flex-wrap items-center justify-center gap-3" id="sugar-cubes-container">
+              <!-- Rendered via JS -->
+            </div>
+
+            <!-- Numbers -->
+            <div class="grid grid-cols-2 gap-4 bg-[#04070d]/80 p-4 rounded-2xl border border-emerald-500/20">
+              <div>
+                <p class="text-xs text-slate-400">Общий вес сахара:</p>
+                <p class="text-2xl font-black font-display text-emerald-400" id="sugar-grams">48 грамм</p>
+              </div>
+              <div>
+                <p class="text-xs text-slate-400">Превышение нормы:</p>
+                <p class="text-2xl font-black font-display text-white" id="sugar-percent">+192%</p>
+              </div>
+            </div>
+
+            <p class="mt-4 text-xs text-slate-300 italic" id="sugar-verdict">
+              ⚠️ Выпив всего одну бутылочку колы, ты за 5 минут съедаешь двойную суточную норму сахара!
+            </p>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 3: Влияние на тело (Анатомическая карта) -->
+  <section id="body" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider font-mono">
+        🩺 Анатомия & Здоровье
+      </div>
+      <h2 class="font-display text-3xl sm:text-4xl font-black text-white tracking-tight">
+        ЧТО ПРОИСХОДИТ ВНУТРИ ТЕЛА?
+      </h2>
+      <p class="text-slate-400 text-sm sm:text-base">
+        Нажми на орган, чтобы увидеть научные данные об ударе фастфуда по организму школьника:
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- Organ Buttons -->
+      <div class="lg:col-span-5 grid grid-cols-2 gap-3">
+        
+        <button onclick="showOrganInfo('brain', this)" data-organ="brain" class="organ-btn active p-4 rounded-2xl glass-card text-left transition flex flex-col justify-between group">
+          <div class="text-3xl mb-2">🧠</div>
+          <div>
+            <h4 class="font-bold text-white text-sm group-hover:text-emerald-400 transition">Головной мозг</h4>
+            <p class="text-[11px] text-slate-400">Фокус, память, сонливость</p>
+          </div>
+        </button>
+
+        <button onclick="showOrganInfo('teeth', this)" data-organ="teeth" class="organ-btn p-4 rounded-2xl glass-card text-left transition flex flex-col justify-between group">
+          <div class="text-3xl mb-2">🦷</div>
+          <div>
+            <h4 class="font-bold text-white text-sm group-hover:text-emerald-400 transition">Зубы и эмаль</h4>
+            <p class="text-[11px] text-slate-400">Кислотная эрозия, кариес</p>
+          </div>
+        </button>
+
+        <button onclick="showOrganInfo('stomach', this)" data-organ="stomach" class="organ-btn p-4 rounded-2xl glass-card text-left transition flex flex-col justify-between group">
+          <div class="text-3xl mb-2">🫄</div>
+          <div>
+            <h4 class="font-bold text-white text-sm group-hover:text-emerald-400 transition">Желудок и ЖКТ</h4>
+            <p class="text-[11px] text-slate-400">Гастрит, микрофлора</p>
+          </div>
+        </button>
+
+        <button onclick="showOrganInfo('heart', this)" data-organ="heart" class="organ-btn p-4 rounded-2xl glass-card text-left transition flex flex-col justify-between group">
+          <div class="text-3xl mb-2">🫀</div>
+          <div>
+            <h4 class="font-bold text-white text-sm group-hover:text-emerald-400 transition">Сердце и сосуды</h4>
+            <p class="text-[11px] text-slate-400">Давление, холестерин</p>
+          </div>
+        </button>
+
+        <button onclick="showOrganInfo('skin', this)" data-organ="skin" class="organ-btn p-4 rounded-2xl glass-card text-left transition flex flex-col justify-between group">
+          <div class="text-3xl mb-2">🧒</div>
+          <div>
+            <h4 class="font-bold text-white text-sm group-hover:text-emerald-400 transition">Кожа лица</h4>
+            <p class="text-[11px] text-slate-400">Высыпания, жирный блеск</p>
+          </div>
+        </button>
+
+        <button onclick="showOrganInfo('liver', this)" data-organ="liver" class="organ-btn p-4 rounded-2xl glass-card text-left transition flex flex-col justify-between group">
+          <div class="text-3xl mb-2">🫁</div>
+          <div>
+            <h4 class="font-bold text-white text-sm group-hover:text-emerald-400 transition">Печень и почки</h4>
+            <p class="text-[11px] text-slate-400">Очистка от красителей</p>
+          </div>
+        </button>
+
+      </div>
+
+      <!-- Detail Card -->
+      <div class="lg:col-span-7">
+        <div id="organ-detail-box" class="rounded-3xl glass-card border border-emerald-500/30 p-6 sm:p-8 shadow-2xl relative">
+          
+          <div class="flex items-center gap-4 mb-6">
+            <div id="organ-icon" class="w-16 h-16 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-4xl shadow-inner shrink-0">
+              🧠
+            </div>
+            <div>
+              <span id="organ-category" class="text-xs uppercase font-extrabold tracking-wider text-emerald-400 font-mono">Нервная система и интеллект</span>
+              <h3 id="organ-title" class="text-2xl font-bold font-display text-white">Головной мозг и внимание на уроках</h3>
+            </div>
+          </div>
+
+          <div class="space-y-4 text-slate-300 text-sm leading-relaxed mb-6">
+            <p id="organ-desc-1">
+              После употребления сладостей и фастфуда наступает резкий всплеск глюкозы. Мозг чувствует короткую эйфорию, но уже через 20 минут уровень сахара резко падает ниже нормы — начинаются «сахарные качели».
+            </p>
+            <div id="organ-desc-2" class="p-4 rounded-2xl bg-[#04070d]/80 border border-emerald-500/20 text-slate-300 text-xs">
+              ⚡ <strong>Результат на уроках:</strong> Пятиклассник теряет концентрацию, отвлекается, допускает обидные ошибки на контрольных по математике и засыпает на третьем уроке.
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-emerald-500/20 flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="text-slate-400">Главный враг:</span>
+              <span id="organ-enemy" class="px-2.5 py-1 rounded-md bg-rose-500/15 border border-rose-500/30 text-rose-300 font-bold">Скрытый сахар, энергетики</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-slate-400">Лучший друг:</span>
+              <span id="organ-friend" class="px-2.5 py-1 rounded-md bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-bold">Орехи, чистая вода</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Section 4: Фитнес-калькулятор "Цена перекуса" -->
+  <section id="calculator" class="py-20 bg-[#060b14] border-y border-emerald-500/20 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider font-mono">
+          🏃‍♂️ Фитнес-счётчик
+        </div>
+        <h2 class="font-display text-3xl sm:text-4xl font-black text-white tracking-tight">
+          КАЛЬКУЛЯТОР «ЦЕНА ПЕРЕКУСА»
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base">
+          Отметь, что ты или твои друзья покупали на перемене, и узнай, сколько кругов по школьному стадиону нужно пробежать:
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Checklist -->
+        <div class="lg:col-span-6 space-y-3">
+          
+          <label class="calc-item flex items-center justify-between p-4 rounded-2xl glass-card cursor-pointer select-none group">
+            <div class="flex items-center gap-3">
+              <input type="checkbox" data-kcal="530" class="calc-checkbox w-5 h-5 rounded text-emerald-500 focus:ring-emerald-400 bg-slate-900 border-emerald-500/30">
+              <span class="text-2xl">🍟</span>
+              <span class="text-sm font-bold text-white group-hover:text-emerald-400 transition">Пачка чипсов (100 грамм)</span>
+            </div>
+            <span class="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/15 border border-emerald-500/30 px-2.5 py-1 rounded-md">+530 ккал</span>
+          </label>
+
+          <label class="calc-item flex items-center justify-between p-4 rounded-2xl glass-card cursor-pointer select-none group">
+            <div class="flex items-center gap-3">
+              <input type="checkbox" data-kcal="210" class="calc-checkbox w-5 h-5 rounded text-emerald-500 focus:ring-emerald-400 bg-slate-900 border-emerald-500/30">
+              <span class="text-2xl">🥤</span>
+              <span class="text-sm font-bold text-white group-hover:text-emerald-400 transition">Бутылочка колы (0.5 л)</span>
+            </div>
+            <span class="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/15 border border-emerald-500/30 px-2.5 py-1 rounded-md">+210 ккал</span>
+          </label>
+
+          <label class="calc-item flex items-center justify-between p-4 rounded-2xl glass-card cursor-pointer select-none group">
+            <div class="flex items-center gap-3">
+              <input type="checkbox" data-kcal="490" class="calc-checkbox w-5 h-5 rounded text-emerald-500 focus:ring-emerald-400 bg-slate-900 border-emerald-500/30">
+              <span class="text-2xl">🍔</span>
+              <span class="text-sm font-bold text-white group-hover:text-emerald-400 transition">Двойной чизбургер</span>
+            </div>
+            <span class="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/15 border border-emerald-500/30 px-2.5 py-1 rounded-md">+490 ккал</span>
+          </label>
+
+          <label class="calc-item flex items-center justify-between p-4 rounded-2xl glass-card cursor-pointer select-none group">
+            <div class="flex items-center gap-3">
+              <input type="checkbox" data-kcal="320" class="calc-checkbox w-5 h-5 rounded text-emerald-500 focus:ring-emerald-400 bg-slate-900 border-emerald-500/30">
+              <span class="text-2xl">🥔</span>
+              <span class="text-sm font-bold text-white group-hover:text-emerald-400 transition">Картофель фри (порция)</span>
+            </div>
+            <span class="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/15 border border-emerald-500/30 px-2.5 py-1 rounded-md">+320 ккал</span>
+          </label>
+
+          <label class="calc-item flex items-center justify-between p-4 rounded-2xl glass-card cursor-pointer select-none group">
+            <div class="flex items-center gap-3">
+              <input type="checkbox" data-kcal="260" class="calc-checkbox w-5 h-5 rounded text-emerald-500 focus:ring-emerald-400 bg-slate-900 border-emerald-500/30">
+              <span class="text-2xl">🍫</span>
+              <span class="text-sm font-bold text-white group-hover:text-emerald-400 transition">Шоколадный батончик</span>
+            </div>
+            <span class="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/15 border border-emerald-500/30 px-2.5 py-1 rounded-md">+260 ккал</span>
+          </label>
+
+          <label class="calc-item flex items-center justify-between p-4 rounded-2xl glass-card cursor-pointer select-none group">
+            <div class="flex items-center gap-3">
+              <input type="checkbox" data-kcal="340" class="calc-checkbox w-5 h-5 rounded text-emerald-500 focus:ring-emerald-400 bg-slate-900 border-emerald-500/30">
+              <span class="text-2xl">🍩</span>
+              <span class="text-sm font-bold text-white group-hover:text-emerald-400 transition">Глазированный пончик</span>
+            </div>
+            <span class="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/15 border border-emerald-500/30 px-2.5 py-1 rounded-md">+340 ккал</span>
+          </label>
+
+        </div>
+
+        <!-- Result Card -->
+        <div class="lg:col-span-6">
+          <div class="rounded-3xl glass-card border border-emerald-500/30 p-6 sm:p-8 shadow-2xl relative">
+            
+            <h3 class="text-lg font-bold font-display text-white mb-4 flex items-center gap-2">
+              <i data-lucide="flame" class="w-5 h-5 text-emerald-400"></i> Итог перекуса:
+            </h3>
+
+            <!-- Totals -->
+            <div class="p-5 rounded-2xl bg-[#04070d]/90 border border-emerald-500/30 mb-6">
+              <div class="flex items-baseline justify-between">
+                <div>
+                  <span class="text-xs text-slate-400 uppercase font-bold tracking-wider font-mono">Всего калорий:</span>
+                  <div class="text-4xl sm:text-5xl font-black font-display text-emerald-400" id="total-kcal">0 ккал</div>
+                </div>
+                <div class="text-right">
+                  <span class="text-xs text-slate-400">От нормы в день:</span>
+                  <div class="text-2xl font-bold font-mono text-white" id="total-percent">0%</div>
+                </div>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-2">
+                (Суточная потребность ученика 5 класса — около 2200-2400 ккал)
+              </p>
+            </div>
+
+            <h4 class="text-xs uppercase font-extrabold tracking-wider text-emerald-400 mb-3 font-mono">
+              Чтобы отработать эти калории, нужно:
+            </h4>
+
+            <div class="space-y-3">
+              
+              <div class="flex items-center justify-between p-3.5 rounded-xl bg-[#04070d]/80 border border-emerald-500/20">
+                <div class="flex items-center gap-3">
+                  <span class="text-2xl">🏃</span>
+                  <div>
+                    <span class="text-xs font-semibold text-white">Круги по школьному стадиону</span>
+                    <p class="text-[11px] text-slate-400">1 круг = 400 метров</p>
+                  </div>
+                </div>
+                <span class="font-display font-bold text-emerald-400 text-lg" id="laps-count">0 кругов</span>
+              </div>
+
+              <div class="flex items-center justify-between p-3.5 rounded-xl bg-[#04070d]/80 border border-emerald-500/20">
+                <div class="flex items-center gap-3">
+                  <span class="text-2xl">🚴</span>
+                  <div>
+                    <span class="text-xs font-semibold text-white">Катание на велосипеде</span>
+                    <p class="text-[11px] text-slate-400">В активном темпе</p>
+                  </div>
+                </div>
+                <span class="font-display font-bold text-teal-300 text-lg" id="cycling-mins">0 минут</span>
+              </div>
+
+              <div class="flex items-center justify-between p-3.5 rounded-xl bg-[#04070d]/80 border border-emerald-500/20">
+                <div class="flex items-center gap-3">
+                  <span class="text-2xl">🪢</span>
+                  <div>
+                    <span class="text-xs font-semibold text-white">Прыжки на скакалке</span>
+                    <p class="text-[11px] text-slate-400">Непрерывно на физкультуре</p>
+                  </div>
+                </div>
+                <span class="font-display font-bold text-white text-lg" id="rope-mins">0 минут</span>
+              </div>
+
+            </div>
+
+            <!-- Author Quote -->
+            <div class="mt-6 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-slate-300 flex items-start gap-3">
+              <span class="text-xl">💡</span>
+              <p>
+                <strong class="text-emerald-300">Совет от Раимова Ихласа:</strong> «Съесть пачку чипсов занимает 5 минут, а сжигать её придётся 3 урока физкультуры подряд. Делай умный выбор!»
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 5: Исследование 5 «Б» класса -->
+  <section id="survey" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider font-mono">
+        📊 Практическая часть работы
+      </div>
+      <h2 class="font-display text-3xl sm:text-4xl font-black text-white tracking-tight">
+        ИССЛЕДОВАНИЕ 5 «Б» КЛАССА
+      </h2>
+      <p class="text-slate-400 text-sm sm:text-base">
+        Раимов Ихлас провел опрос 26 учеников своего класса и выполнил 2 наглядных лабораторных опыта:
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-12 gap-8 items-center">
+      
+      <!-- Chart -->
+      <div class="lg:col-span-6 rounded-3xl glass-card border border-emerald-500/30 p-6 sm:p-8">
+        <h3 class="font-display font-bold text-base sm:text-lg text-white mb-2 flex items-center gap-2">
+          <span>🍕</span> Как часто пятиклассники покупают снеки и фастфуд?
+        </h3>
+        <p class="text-xs text-slate-400 mb-6">Результаты анкетирования 26 учеников 5 «Б» класса:</p>
+        
+        <div class="relative h-64 flex items-center justify-center">
+          <canvas id="surveyChart1"></canvas>
+        </div>
+
+        <div class="grid grid-cols-3 gap-2 text-center mt-6 pt-4 border-t border-emerald-500/20 text-xs">
+          <div>
+            <div class="w-3 h-3 rounded-full bg-emerald-400 mx-auto mb-1"></div>
+            <span class="text-slate-400">Каждый день</span>
+            <div class="font-bold text-white">46.2% (12 чел)</div>
+          </div>
+          <div>
+            <div class="w-3 h-3 rounded-full bg-teal-300 mx-auto mb-1"></div>
+            <span class="text-slate-400">2-3 раза в нед.</span>
+            <div class="font-bold text-white">34.6% (9 чел)</div>
+          </div>
+          <div>
+            <div class="w-3 h-3 rounded-full bg-emerald-950 border border-emerald-500/40 mx-auto mb-1"></div>
+            <span class="text-slate-400">Редко / никогда</span>
+            <div class="font-bold text-white">19.2% (5 чел)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Experiments -->
+      <div class="lg:col-span-6 space-y-4">
+        
+        <div class="p-6 rounded-3xl glass-card border border-emerald-500/30">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-3xl">🧪</span>
+            <div>
+              <span class="text-xs uppercase font-extrabold tracking-wider text-emerald-400 font-mono">Опыт №1 (Раимов Ихлас)</span>
+              <h4 class="font-display font-bold text-base text-white">Опыт с чипсами и жиром</h4>
+            </div>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-3">
+            <strong>Ход опыта:</strong> Ихлас раздавил 3 чипса между слоями фильтровальной бумаги. Бумага моментально пропиталась жиром и стала прозрачной на свету.
+          </p>
+          <div class="p-3 rounded-xl bg-[#04070d] text-xs text-emerald-400 font-mono border border-emerald-500/30">
+            Вывод: До 35% веса чипсов — это пережаренное окисленное масло!
+          </div>
+        </div>
+
+        <div class="p-6 rounded-3xl glass-card border border-emerald-500/30">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-3xl">🪙</span>
+            <div>
+              <span class="text-xs uppercase font-extrabold tracking-wider text-emerald-400 font-mono">Опыт №2 (Раимов Ихлас)</span>
+              <h4 class="font-display font-bold text-base text-white">Газировка и ржавая монетка</h4>
+            </div>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-3">
+            <strong>Ход опыта:</strong> Темную окислившуюся медную монетку опустили в стакан с колой на 24 часа. На следующий день монетка заблестела от растворения окислов.
+          </p>
+          <div class="p-3 rounded-xl bg-[#04070d] text-xs text-emerald-400 font-mono border border-emerald-500/30">
+            Вывод: Ортофосфорная кислота растворяет металл и разрушает эмаль зубов!
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Section 6: Здоровые альтернативы -->
+  <section id="alternatives" class="py-20 bg-[#060b14] border-y border-emerald-500/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider font-mono">
+          🥦 Вкусно и Полезно
+        </div>
+        <h2 class="font-display text-3xl sm:text-4xl font-black text-white tracking-tight">
+          КРУТЫЕ АЛЬТЕРНАТИВЫ ФАСТФУДУ
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base">
+          Правильное питание — это не скучная диета, а современный и вкусный выбор! Посмотри, чем можно легко заменить вредные снеки:
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <div class="rounded-3xl glass-card p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-xs mb-4">
+              <span class="px-2.5 py-1 rounded-full bg-rose-500/15 text-rose-300 font-bold line-through">❌ Чипсы из пачки</span>
+              <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 font-bold">✅ Крутая замена</span>
+            </div>
+            <h3 class="font-display font-bold text-lg text-white mb-2">Чипсы из лаваша или яблок</h3>
+            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+              Тонкий армянский лаваш режется на треугольники, сбрызгивается капелькой оливкового масла, посыпается паприкой и запекается в духовке 5 минут!
+            </p>
+          </div>
+          <div class="bg-[#04070d] p-3 rounded-xl border border-emerald-500/20 text-xs text-emerald-400 flex items-center gap-2">
+            <i data-lucide="check" class="w-4 h-4 shrink-0"></i> Хрустит так же аппетитно, но 0% канцерогенов.
+          </div>
+        </div>
+
+        <div class="rounded-3xl glass-card p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-xs mb-4">
+              <span class="px-2.5 py-1 rounded-full bg-rose-500/15 text-rose-300 font-bold line-through">❌ Кола и лимонады</span>
+              <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 font-bold">✅ Крутая замена</span>
+            </div>
+            <h3 class="font-display font-bold text-lg text-white mb-2">Цитрусовый лимонад с мятой</h3>
+            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+              В кувшин с чистой водой добавляем дольки лимона, апельсина, свежую мяту и ягоды малины. Освежает в разы круче любой колы!
+            </p>
+          </div>
+          <div class="bg-[#04070d] p-3 rounded-xl border border-emerald-500/20 text-xs text-emerald-400 flex items-center gap-2">
+            <i data-lucide="check" class="w-4 h-4 shrink-0"></i> Натуральный витамин C и ни грамма белого сахара.
+          </div>
+        </div>
+
+        <div class="rounded-3xl glass-card p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-xs mb-4">
+              <span class="px-2.5 py-1 rounded-full bg-rose-500/15 text-rose-300 font-bold line-through">❌ Жирный бургер</span>
+              <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 font-bold">✅ Крутая замена</span>
+            </div>
+            <h3 class="font-display font-bold text-lg text-white mb-2">Сэндвич с запеченной индейкой</h3>
+            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+              Цельнозерновой хлеб, листья салата, ломтики запеченной птицы, огурец и соус из натурального йогурта с укропом.
+            </p>
+          </div>
+          <div class="bg-[#04070d] p-3 rounded-xl border border-emerald-500/20 text-xs text-emerald-400 flex items-center gap-2">
+            <i data-lucide="check" class="w-4 h-4 shrink-0"></i> Заряд энергии на 4 урока без сонливости.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 7: ИНТЕРАКТИВНАЯ ВИКТОРИНА (ROBUST QUIZ ENGINE)
+       ========================================================================== -->
+  <section id="quiz" class="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="rounded-3xl glass-card border-2 border-emerald-500/40 p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+      
+      <!-- Quiz Header -->
+      <div class="text-center space-y-3 mb-8">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-emerald-400 text-xs font-bold uppercase tracking-wider font-mono">
+          🎯 Проверь знания
+        </div>
+        <h2 class="font-display text-3xl sm:text-4xl font-black text-white">
+          ТЕСТ: ЗНАТОК ЗДОРОВОЙ ЕДЫ
+        </h2>
+        <p class="text-slate-400 text-xs sm:text-sm">
+          Ответь на 5 вопросов от Раимова Ихласа и получи именной сертификат отличника ЗОЖ 5 «Б» класса!
+        </p>
+      </div>
+
+      <!-- Live Quiz Container -->
+      <div id="quiz-container">
+        
+        <!-- Live Progress -->
+        <div class="w-full bg-slate-900 rounded-full h-2.5 mb-6 overflow-hidden border border-emerald-500/20">
+          <div id="quiz-progress" class="bg-gradient-to-r from-emerald-500 via-emerald-400 to-teal-300 h-2.5 rounded-full w-1/5 transition-all duration-300"></div>
+        </div>
+
+        <div class="flex items-center justify-between text-xs text-slate-400 mb-4 font-mono">
+          <span id="quiz-step" class="font-bold text-white">Вопрос 1 из 5</span>
+          <span id="quiz-score-badge" class="font-extrabold text-emerald-400 bg-emerald-500/15 border border-emerald-500/30 px-3 py-1 rounded-lg">Баллы: 0</span>
+        </div>
+
+        <!-- Question Card -->
+        <div class="bg-[#04070d]/90 p-6 rounded-2xl border border-emerald-500/30 mb-6 shadow-inner">
+          <h3 id="quiz-question" class="text-lg sm:text-xl font-bold text-white mb-6 font-display">
+            1. Сколько кубиков рафинированного сахара скрыто в обычной бутылке колы (0.5 л)?
+          </h3>
+
+          <!-- Options Pre-rendered for zero-delay loading -->
+          <div id="quiz-options" class="space-y-3">
+            <button type="button" class="quiz-opt-btn" onclick="handleOptionIndex(0)">
+              <div class="flex items-center gap-3 text-left">
+                <span class="quiz-opt-key">А</span>
+                <span class="quiz-opt-text">Около 1–2 кубиков для легкого вкуса</span>
+              </div>
+              <span class="quiz-opt-status text-lg opacity-40">⚪</span>
+            </button>
+            <button type="button" class="quiz-opt-btn" onclick="handleOptionIndex(1)">
+              <div class="flex items-center gap-3 text-left">
+                <span class="quiz-opt-key">Б</span>
+                <span class="quiz-opt-text">Примерно 12 кубиков (почти 50 грамм!)</span>
+              </div>
+              <span class="quiz-opt-status text-lg opacity-40">⚪</span>
+            </button>
+            <button type="button" class="quiz-opt-btn" onclick="handleOptionIndex(2)">
+              <div class="flex items-center gap-3 text-left">
+                <span class="quiz-opt-key">В</span>
+                <span class="quiz-opt-text">Сахара там нет, только газ и вода</span>
+              </div>
+              <span class="quiz-opt-status text-lg opacity-40">⚪</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Live Feedback Message (Correct / Incorrect Explanation) -->
+        <div id="quiz-feedback" class="hidden"></div>
+
+        <!-- Next Question Action Button -->
+        <div class="flex justify-end pt-2">
+          <button id="quiz-next-btn" onclick="nextQuestion()" class="hidden px-7 py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-[#04070d] font-display font-extrabold text-sm transition flex items-center gap-2.5 shadow-xl shadow-emerald-500/30">
+            <span>Следующий вопрос</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Quiz Results & Printable Certificate (Hidden initially) -->
+      <div id="quiz-result-box" class="hidden text-center space-y-6 py-6">
+        
+        <div class="w-20 h-20 rounded-full bg-emerald-500/20 border-2 border-emerald-400 text-emerald-400 flex items-center justify-center text-4xl mx-auto shadow-inner">
+          🏆
+        </div>
+
+        <div class="space-y-2">
+          <h3 class="text-2xl sm:text-3xl font-bold font-display text-white" id="result-title">
+            Поздравляем!
+          </h3>
+          <p class="text-sm text-slate-300" id="result-subtitle">
+            Ты ответил на все вопросы!
+          </p>
+        </div>
+
+        <!-- Live Name Input for Certificate -->
+        <div class="max-w-md mx-auto text-left space-y-2 hide-on-print">
+          <label class="text-xs font-bold text-emerald-400 uppercase font-mono block">Введи имя для сертификата:</label>
+          <input id="student-name-input" type="text" placeholder="Например: Иван Смирнов или Ученик 5 «Б»" class="w-full px-4 py-3 rounded-xl bg-[#04070d] border border-emerald-500/40 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-emerald-400 transition">
+        </div>
+
+        <!-- Printable Certificate Card -->
+        <div id="certificate" class="certificate-frame max-w-lg mx-auto p-7 sm:p-8 rounded-3xl text-center shadow-2xl space-y-4 relative overflow-hidden">
+          
+          <div class="flex items-center justify-between text-xs font-mono text-emerald-400 pb-2 border-b border-emerald-500/20">
+            <span>ШКОЛА • 2026</span>
+            <span>СЕРТИФИКАТ ЗОЖ</span>
+          </div>
+
+          <div class="py-2">
+            <h4 class="text-xl sm:text-2xl font-black font-display text-white tracking-wide">
+              ОТЛИЧНИК ЗДОРОВОГО ПИТАНИЯ
+            </h4>
+            <p class="text-xs text-slate-400 mt-1">
+              Награждается:
+            </p>
+            <div id="cert-student-name" class="text-xl sm:text-2xl font-black text-emerald-400 font-display mt-1">
+              Ученик 5 «Б» класса
+            </div>
+          </div>
+
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Успешно прошел исследование и тест по проекту <br>
+            <strong class="text-white">«Неправильная пища: ловушка вкуса»</strong> <br>
+            и доказал умение отличать полезную еду от пищевого мусора!
+          </p>
+
+          <div class="grid grid-cols-2 gap-3 bg-[#04070d]/80 p-3 rounded-xl border border-emerald-500/30 text-xs font-mono">
+            <div>
+              <span class="text-slate-400">Результат теста:</span>
+              <div class="font-bold text-white" id="cert-score-number">5 из 5</div>
+            </div>
+            <div>
+              <span class="text-slate-400">Итоговая оценка:</span>
+              <div class="font-bold text-emerald-400">5 с плюсом (5+) 🌟</div>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-emerald-500/20 flex items-center justify-between text-[11px] text-slate-400">
+            <span class="text-emerald-400 font-bold">Раимов Ихлас (5 «Б»)</span>
+            <span>Научный проект 2026</span>
+          </div>
+
+        </div>
+
+        <!-- Buttons to restart and print -->
+        <div class="flex flex-wrap items-center justify-center gap-3 pt-4 hide-on-print">
+          <button onclick="restartQuiz()" class="px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 text-xs font-bold transition border border-slate-700">
+            Пройти заново
+          </button>
+          <button onclick="window.print()" class="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-[#04070d] text-xs font-bold transition flex items-center gap-2 font-display shadow-lg shadow-emerald-500/25">
+            <i data-lucide="printer" class="w-4 h-4"></i>
+            Распечатать сертификат
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 8: Памятка для 5 «Б» класса -->
+  <section class="py-20 bg-[#060b14] border-t border-emerald-500/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="rounded-3xl glass-card border border-emerald-500/30 p-8 sm:p-12 relative overflow-hidden">
+        
+        <div class="grid lg:grid-cols-12 gap-8 items-center">
+          
+          <div class="lg:col-span-8 space-y-4">
+            <span class="px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 font-mono">
+              Памятка для 5 «Б» класса
+            </span>
+            <h2 class="font-display text-2xl sm:text-3xl font-black text-white">
+              ЗОЛОТЫЕ ПРАВИЛА ЗДОРОВОГО ШКОЛЬНИКА
+            </h2>
+            <ul class="space-y-3 text-xs sm:text-sm text-slate-300">
+              <li class="flex items-start gap-2.5">
+                <span class="text-emerald-400 font-bold">1.</span>
+                <span><strong>Правило 80/20:</strong> Пусть 80% рациона составляет здоровая домашняя еда, а фастфуд будет лишь редким исключением.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-emerald-400 font-bold">2.</span>
+                <span><strong>Бутылка с водой в рюкзаке:</strong> Часто мы путаем жажду с голодом и покупаем пачку чипсов, когда телу просто нужна вода.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-emerald-400 font-bold">3.</span>
+                <span><strong>Читай этикетки:</strong> Если в составе сахар или гидрогенизированное масло стоит на 1-м или 2-м месте — оставь на полке.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-emerald-400 font-bold">4.</span>
+                <span><strong>Здоровый перекус с собой:</strong> Яблоко, орехи и домашний бутерброд спасут от вредного фастфуда на перемене.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="lg:col-span-4 text-center lg:text-right">
+            <button onclick="window.print()" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-[#04070d] font-display font-black text-sm shadow-xl shadow-emerald-500/25 transition transform hover:scale-105 active:scale-95 flex items-center justify-center gap-3 mx-auto lg:ml-auto">
+              <i data-lucide="printer" class="w-5 h-5"></i>
+              <span>Распечатать памятку</span>
+            </button>
+            <p class="text-[11px] text-slate-400 mt-3">
+              Готовая памятка на лист А4 для раздачи одноклассникам на уроке!
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 border-t border-emerald-500/20 text-slate-400 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      
+      <div class="flex items-center gap-3">
+        <span class="text-3xl">🥗</span>
+        <div>
+          <p class="font-bold text-white font-display">Школьный исследовательский проект 2026</p>
+          <p class="text-slate-400">Тема: «Неправильная пища: ловушка вкуса»</p>
+        </div>
+      </div>
+
+      <div class="text-center md:text-right space-y-1">
+        <p class="text-slate-300 font-semibold">
+          Выполнил: <span class="text-emerald-400 font-bold">Раимов Ихлас</span>
+        </p>
+        <p class="text-slate-400">Ученик 5 «Б» класса • Защита проекта</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
